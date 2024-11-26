@@ -87,9 +87,9 @@ app.delete("/post/:id", (req, res) => {
 
         const newList = list.filter(obj => obj.id != id);
         
+        list = newList;
         
-        
-        res.send(newList);
+        res.send(list);
 
     } catch (error) {
         console.log(error);
