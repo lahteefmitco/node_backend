@@ -38,18 +38,19 @@ app.put("/post/:id", (req, res) => {
 
     try {
         const id = req.params.id;
-        console.log(id);
+        console.log("params id:- "+id);
 
         const post = req.body
 
-        console.log(Object.keys(post).length);
-
+        
         if (Object.keys(post).length < 3) {
             throw "Error";
         }
+        console.log("incoming post:- ");
         console.log(post);
+        
 
-        console.log(post.userId);
+       
 
 
 
@@ -65,6 +66,13 @@ app.put("/post/:id", (req, res) => {
             }
         });
 
+        console.log("list");
+        list.forEach(v=>{
+            console.log(v.title);
+            
+        })
+        
+
         res.send(list);
     } catch (e) {
         console.log(e);
@@ -77,8 +85,10 @@ app.delete("/post/:id", (req, res) => {
         const id = req.params.id;
         console.log(id);
 
-        const newList = list.filter(obj => obj.id === id);
-
+        const newList = list.filter(obj => obj.id != id);
+        
+        
+        
         res.send(newList);
 
     } catch (error) {
