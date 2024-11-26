@@ -6,7 +6,9 @@ app.use(bodyParser.json())
 
 var list = [];
 
-
+app.get("/",(req,res)=>{
+    res.send("Welcome to Oxdo Technologies")
+})
 
 
 app.get("/posts", (req, res) => {
