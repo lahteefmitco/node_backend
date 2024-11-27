@@ -1,6 +1,11 @@
 const exp = require("express");
 const bodyParser = require('body-parser')
+const cors = require("cors");
+
 const app = exp();
+app.use(cors());
+
+
 
 app.use(bodyParser.json())
 
@@ -11,13 +16,27 @@ app.get("/",(req,res)=>{
 })
 
 
+
+
 app.get("/posts", (req, res) => {
-    res.send(list);
+    
+    try {
+        if(req.headers["key"]!="oxdo") throw "No heder"
+
+        res.send(list);
+        
+    } catch (error) {
+        console.log(error);
+        res.status(400).send(error); 
+
+    }
+    
 })
 
 app.post("/post", (req, res) => {
 
     try {
+        if(req.headers["key"]!="oxdo") throw "No heder"
         const post = req.body
 
         console.log(Object.keys(post).length);
@@ -32,13 +51,15 @@ app.post("/post", (req, res) => {
         res.send(post);
     } catch (e) {
         console.log(e);
-        res.status(400).send("Error");
+        res.status(400).send(error); 
+
     }
 })
 
 app.put("/post/:id", (req, res) => {
 
     try {
+        if(req.headers["key"]!="oxdo") throw "No heder"
         const id = req.params.id;
         console.log("params id:- "+id);
 
@@ -78,12 +99,14 @@ app.put("/post/:id", (req, res) => {
         res.send(list);
     } catch (e) {
         console.log(e);
-        res.status(400).send("Error");
+        res.status(400).send(error); 
+
     }
 })
 
 app.delete("/post/:id", (req, res) => {
     try {
+        if(req.headers["key"]!="oxdo") throw "No heder"
         const id = req.params.id;
         console.log(id);
 
@@ -95,13 +118,15 @@ app.delete("/post/:id", (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.status(400).send("Error");
+        res.status(400).send(error); 
+
     }
 })
 
 
 app.get("/search",(req,res)=>{
     try {
+        if(req.headers["key"]!="oxdo") throw "No heder"
         const {searchText} = req.query || "";
 
         console.log(searchText);
@@ -117,7 +142,7 @@ app.get("/search",(req,res)=>{
         res.send(newList);
     } catch (error) {
         console.log(error);
-        res.status(400).send("Error"); 
+        res.status(400).send(error); 
     }
 })
 
