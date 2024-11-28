@@ -1,6 +1,8 @@
 const exp = require("express");
 const bodyParser = require('body-parser')
 const cors = require("cors");
+const multer = require("multer");
+
 
 const app = exp();
 app.use(cors());
@@ -10,6 +12,12 @@ app.use(cors());
 app.use(bodyParser.json())
 
 var list = [];
+
+
+
+
+app.use(exp.static("images"));
+
 
 app.get("/",(req,res)=>{
     res.send("Welcome to Oxdo Technologies")
