@@ -345,7 +345,7 @@ app.post("/post", (req, res) => {
             throw "Error: Not enough data";
         }
         
-        post.id = list.length + 1;
+        post.id = getTheMaxId(list)+1;
         list.push(post);
         res.send(post);
     } catch (e) {
@@ -449,4 +449,12 @@ function broadcast(message) {
   }
 
 // Start the HTTP server
-server.listen(3000, () => console.log("App is running on port 3000"));
+server.listen(3001, () => console.log("App is running on port 3000"));
+
+
+function getTheMaxId(list){
+    const maxId = list.reduce((max, item) => item.id > max ? item.id : max, 0);
+
+    console.log("Maximum ID:", maxId);
+    return maxId;
+}
