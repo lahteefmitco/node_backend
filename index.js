@@ -332,7 +332,7 @@ app.get("/posts", (req, res) => {
         res.send(list);
     } catch (error) {
         console.log(error);
-        res.status(400).send(error);
+        res.status(400).send(error.message);
     }
 });
 
@@ -350,7 +350,7 @@ app.post("/post", (req, res) => {
         res.send(post);
     } catch (e) {
         console.log(e);
-        res.status(400).send(e); // Use e instead of error
+        res.status(400).send(e.message); // Use e instead of error
     }
 });
 
@@ -361,7 +361,7 @@ app.put("/post/:id", (req, res) => {
         const id = parseInt(req.params.id); // Convert id to integer
         const post = req.body;
 
-        if (Object.keys(post).length < 3) {
+        if (Object.keys(post).length < 4) {
             throw "Error: Not enough data";
         }
 
@@ -372,10 +372,10 @@ app.put("/post/:id", (req, res) => {
             return obj;
         });
 
-        res.send(list);
+        res.send(post);
     } catch (e) {
         console.log(e);
-        res.status(400).send(e); // Use e instead of error
+        res.status(400).send(e.message); // Use e instead of error
     }
 });
 
@@ -389,7 +389,7 @@ app.delete("/post/:id", (req, res) => {
         res.send(list);
     } catch (error) {
         console.log(error);
-        res.status(400).send(error);
+        res.status(400).send(error.message);
     }
 });
 
@@ -404,7 +404,7 @@ app.get("/search", (req, res) => {
         res.send(newList);
     } catch (error) {
         console.log(error);
-        res.status(400).send(error);
+        res.status(400).send(error.message);
     }
 });
 
