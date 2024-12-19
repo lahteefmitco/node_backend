@@ -435,6 +435,7 @@ wss.on("connection", (ws,req) => {
 
     ws.on('close', () => {
         console.log('Client disconnected');
+        
         clients.delete(ws);
     });
 });
@@ -449,7 +450,7 @@ function broadcast(message) {
   }
 
 // Start the HTTP server
-server.listen(3001, () => console.log("App is running on port 3000"));
+server.listen(3001, () => console.log("App is running on port 3001"));
 
 
 function getTheMaxId(list){
